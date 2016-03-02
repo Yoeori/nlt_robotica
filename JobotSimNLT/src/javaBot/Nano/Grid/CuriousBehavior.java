@@ -34,10 +34,6 @@ public class CuriousBehavior extends Behavior
 
 	public void doBehavior()
 	{		
-		// Anders dan in FleeBehavior wordt hier de state getest.
-		// Deze dient voor opdracht 2 op nul (0) te staan. 
-		// In volgende lessen gaan we deze variabele gebruiken.
-		// De rest van de code is hetzelfde als in FleeBehavior.
 
 		if (state == 0) {
 			ds = joBot.getSensorValue(BaseController.SENSOR_DS);
