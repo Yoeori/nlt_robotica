@@ -49,9 +49,9 @@ public class CuriousBehavior extends Behavior
 			// if ((ds > 200) && (ds < ???))  // Vul hier de juiste waarde in
 
 			if (ds > 200) {
-				joBot.setLed(BaseController.LED_GREEN, true);
+				joBot.setLed(BaseController.LED_BLUE, true);
 				// Show sensor sees something
-				joBot.drive(100, 100);
+				joBot.drive(100, 20);
 			}
 		}		
 	}
