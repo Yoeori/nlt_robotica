@@ -51,12 +51,12 @@ public class CuriousBehavior extends Behavior
 			// && (and) operator als volgt:
 			// if ((ds > 200) && (ds < ???))  // Vul hier de juiste waarde in
 
-			if (ds > 200 && ds < 500) {
+			if (ds > 200) {
 				joBot.setLed(BaseController.LED_YELLOW, true);
 				// Show sensor sees something
-				joBot.drive(50, 50);
+				joBot.drive(100, 0);
 			} else {
-				joBot.drive(0, 0);
+				joBot.drive(50, 50);
 			}
 		}		
 	}

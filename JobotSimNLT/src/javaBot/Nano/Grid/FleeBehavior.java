@@ -15,11 +15,10 @@ public class FleeBehavior extends Behavior
 	 * 
 	 */
 	
-	public FleeBehavior(BaseController initJoBot, PeriodicTimer initServiceTick,
-			int servicePeriod)
-	{
+	public FleeBehavior(BaseController initJoBot, PeriodicTimer initServiceTick, int servicePeriod) {
 		super(initJoBot, initServiceTick, servicePeriod);
-		joBot = initJoBot;	}
+		joBot = initJoBot;	
+	}
 
 	public void doBehavior()
 	{
@@ -30,7 +29,7 @@ public class FleeBehavior extends Behavior
 
 		if (ds > 200) {
 			joBot.setLed(BaseController.LED_GREEN, true);	// Show sensor sees something
-			joBot.drive(-100, -100);	
+			joBot.drive(-100, -100);
 		}
 	}
 }

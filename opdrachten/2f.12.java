@@ -43,6 +43,7 @@ public class CuriousBehavior extends Behavior
 			ds = joBot.getSensorValue(BaseController.SENSOR_DS);
 			System.out.println(ds);
 			joBot.setStatusLeds(false, false, false);  // Turn leds off
+			joBot.drive(0, 0);
 
 			// Zorg voor opdracht 2G dat de robot niet te dichtbij komt
 			// Dat doe je door gebruik te maken van een extra test die
@@ -51,12 +52,10 @@ public class CuriousBehavior extends Behavior
 			// && (and) operator als volgt:
 			// if ((ds > 200) && (ds < ???))  // Vul hier de juiste waarde in
 
-			if (ds > 200 && ds < 500) {
+			if (ds > 200) {
 				joBot.setLed(BaseController.LED_YELLOW, true);
 				// Show sensor sees something
-				joBot.drive(50, 50);
-			} else {
-				joBot.drive(0, 0);
+				joBot.drive(100, 0);
 			}
 		}		
 	}
