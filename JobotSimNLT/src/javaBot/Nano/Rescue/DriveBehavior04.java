@@ -64,17 +64,24 @@ public class DriveBehavior04 extends Behavior {
 			joBot.printLCD("State=3");
 		}
 		if (state == 10) {
-			joBotDrive(10, 11, 50, 50, 20);
+			joBotDrive(10, 10, 50, 50, 20);
 		}
 	}
 
 	private void joBotDrive(int curState, int newState, int l, int r, int t) {
 		if (state == curState) { // cur = Current, ofwel huidige waarde
-		 joBot.drive(l,r); 
-		 if (count++ >= t) {
-			state = newState;
-			 joBot.printLCD("State=" + state); 
-			 count = 0; }
-		 } 
+			if (count < 6) {
+				joBot.drive(100, 0);
+			} else if (count <= 25) {
+				joBot.drive(100, 100);
+			}
+			if (count++ >= t) {
+				state = newState;
+				joBot.printLCD("State=" + state);
+				count = 0;
+			}
+
 		}
+
+	}
 }
