@@ -50,8 +50,8 @@ public class CuriousBehavior09 extends Behavior {
 	/**
 	 * Andere waarden
 	 */
-	private int threshold = 50;
-	private int speedThreshold = 20;
+	private int threshold = 30;
+	private int speedThreshold = 10;
 	private int rnd1 = 0;
 	private int rnd2 = 0;
 	private int wait = 0;
@@ -195,17 +195,5 @@ public class CuriousBehavior09 extends Behavior {
 
 	private int random1(int mask) {
 		return (int) (System.currentTimeMillis() >> 4) & mask;
-	}
-
-	/**
-	 * absDiff determines the difference between the two given numbers. If the
-	 * result is negative, it is made into a positive number so the absolute
-	 * value of the difference is returned
-	 */
-	private int absDiff(int a, int b) {
-		int diff = a - b;
-		if (diff < 0)
-			return 0 - diff;
-		return diff;
 	}
 }

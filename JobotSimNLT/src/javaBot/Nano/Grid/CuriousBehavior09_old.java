@@ -19,39 +19,23 @@ package javaBot.Nano.Grid;
 
 import com.muvium.apt.PeriodicTimer;
 
-public class CuriousBehavior09 extends Behavior {
-	/**
-	 * De robot
-	 */
+public class CuriousBehavior09_old extends Behavior {
+	// Declaraties voor opdracht 2
 	private BaseController joBot;
-
-	/**
-	 * De status op dit moment
-	 */
 	private int state = 10;
-
-	/**
-	 * De sensorwaarde op dit moment
-	 */
 	int ds = 0;
 
-	/**
-	 * Lijst van mogelijke statussen
-	 */
+	// Declaraties toegevoegd voor opdracht 8b
 	private static final int stateInit = 10;
 	private static final int stateSense = 20;
 	private static final int stateSenseScared = 22;
 	private static final int stateSenseCurious = 23;
 	private static final int stateSenseNeutral = 24;
 	private static final int stateReason = 30;
-	private static final int stateAct = 40; // wordt niet gebruikt
+	// private static final int stateAct = 40; // Not used as state
 	private static final int stateActWander = 41;
-
-	/**
-	 * Andere waarden
-	 */
-	private int threshold = 50;
-	private int speedThreshold = 20;
+	private int threshold = 30;
+	private int speedThreshold = 10;
 	private int rnd1 = 0;
 	private int rnd2 = 0;
 	private int wait = 0;
@@ -62,34 +46,50 @@ public class CuriousBehavior09 extends Behavior {
 	private int diff = 0;
 	private int speed = 50;
 
-	/**
-	 * Main functie van deze klasse
-	 * 
-	 * @param initJoBot
-	 * @param initServiceTick
-	 * @param servicePeriod
-	 */
-	public CuriousBehavior09(BaseController initJoBot,
+	public CuriousBehavior09_old(BaseController initJoBot,
 			PeriodicTimer initServiceTick, int servicePeriod) {
 		super(initJoBot, initServiceTick, servicePeriod);
 		joBot = initJoBot;
 	}
 
-	/**
-	 * Voert het gedrag van de robot uit
-	 */
 	public void doBehavior() {
+
+		if (state == 0) {
+			ds = joBot.getSensorValue(BaseController.SENSOR_DS);
+
+			joBot.setStatusLeds(false, false, false); // Turn leds off
+			joBot.drive(0, 0);
+
+			// Zorg voor opdracht 2G dat de robot niet te dichtbij komt
+			// Dat doe je door gebruik te maken van een extra test die
+			// kijkt of de waarde niet hoger wordt dan bij 10cm afstand
+			// Om die samen te voegen met de sensor waarde, gebruik je de
+			// && (and) operator als volgt:
+			// if ((ds > 200) && (ds < ???)) // Vul hier de juiste waarde in
+
+			if (ds > 200) {
+				joBot.setLed(BaseController.LED_GREEN, true);
+				// Show sensor sees something
+				joBot.drive(100, 100);
+			}
+		}
+
 		// Anders dan in FleeBehavior wordt hier de state getest.
 		// Deze dient voor opdracht 2 op nul (0) te staan.
 		// In volgende lessen gaan we deze variabele gebruiken.
 		// De rest van de code is hetzelfde als in FleeBehavior.
 
+		// ==============================================================
+		// Opdracht 8B
+		// =============================================================
+		// We maken eerst een infrastructuur volgens het state diagram
+		// De robot doet nog niets, maar we kunnen dit wel testen
+		// De leds geven aan of de robot iets ziet
 		if (state == stateInit) {
 			System.out.println("Reactive Behavior");
 			joBot.setStatusLeds(false, false, false);
 			state = stateSense;
 		}
-
 		// ---------------------------------------------------------------
 		// Sense
 		// ---------------------------------------------------------------
@@ -104,18 +104,19 @@ public class CuriousBehavior09 extends Behavior {
 				state = stateSenseNeutral;
 			else {
 				state = stateReason;
-				// Opdracht 9a.1
-				// -------------------------------------------------------
+				// Hier gaan we later de snelheid en richting bepalen
+				// Hier gaan we later de snelheid en richting bepalen
+				// Opdracht 9a.1 -------------------------------------------------------
 				// Bepaal snelheid en richting
 				diff = (ds - prevDs);
 				if (diff > threshold)
-					senseToMe = true;
+				senseToMe = true;
 				else
-					senseToMe = false;
+				senseToMe = false;
 				if ((absDiff(prevDs, ds) > speedThreshold))
-					senseFast = true;
+				senseFast = true;
 				else
-					senseFast = false;
+				senseFast = false;
 				System.out.print("Diff=");
 				System.out.print(diff);
 				System.out.print(" ToMe=");
@@ -124,7 +125,6 @@ public class CuriousBehavior09 extends Behavior {
 				System.out.println(senseFast);
 			}
 		}
-
 		// -----------------------------------------------------------------
 		// Reason
 		// -----------------------------------------------------------------
@@ -139,7 +139,6 @@ public class CuriousBehavior09 extends Behavior {
 			else
 				state = stateSenseNeutral;
 		}
-
 		// ------------------------------------------------------------------
 		// Act
 		// ------------------------------------------------------------------
@@ -154,13 +153,15 @@ public class CuriousBehavior09 extends Behavior {
 			// Drive backward Opdracht 8c.2 ------------------
 			wait = 15;
 			state = stateActWander; // Start wandering
-		} else if (state == stateSenseCurious) {
+		}
+		if (state == stateSenseCurious) {
 			joBot.setStatusLeds(false, true, false);
 			// show curious = green
 			System.out.println("Curious");
 			joBot.drive(speed / 2, speed / 2);
 			// Drive forward Opdracht 8c.2 -------------------
-		} else if (state == stateSenseNeutral) {
+		}
+		if (state == stateSenseNeutral) {
 			joBot.setStatusLeds(false, false, false);
 			// show neutral = no lights
 			// Random move Opdracht 8c.2 ---------------------
@@ -175,20 +176,29 @@ public class CuriousBehavior09 extends Behavior {
 			System.out.println(wait);
 			joBot.drive(rnd1, rnd2);
 			state = stateActWander;
-		} else if (state == stateActWander) {
-			// Show wandering = yellow
+		}
+		if (state == stateActWander) {
 			joBot.setStatusLeds(true, false, false);
+			// Show wandering = yellow
 			if (wait-- > 0)
 				nextState = stateActWander;
 		}
-
 		// And prepare for the next cycle
 		state = nextState;
 	}
+		// -------------------------------------------------------------------
+		// Extra functies die in de opdrachten worden gebruikt.
+		// -------------------------------------------------------------------
 
-	// -------------------------------------------------------------------
-	// Extra functies die in de opdrachten worden gebruikt.
-	// -------------------------------------------------------------------
+		/**
+		 * Take the current time and mask out a part of it This way the sequence
+		 * in the timer is somewhat random - random takes a part of the system
+		 * timer - random1 shifts the time to the right and then takes another
+		 * part of the time. The mask size determines the maximum value
+		 */
+
+	
+
 	private int random(int mask) {
 		return (int) System.currentTimeMillis() & mask;
 	}
@@ -196,16 +206,11 @@ public class CuriousBehavior09 extends Behavior {
 	private int random1(int mask) {
 		return (int) (System.currentTimeMillis() >> 4) & mask;
 	}
-
-	/**
-	 * absDiff determines the difference between the two given numbers. If the
-	 * result is negative, it is made into a positive number so the absolute
-	 * value of the difference is returned
-	 */
-	private int absDiff(int a, int b) {
-		int diff = a - b;
-		if (diff < 0)
-			return 0 - diff;
-		return diff;
-	}
+	
+	private int absDiff(int one, int two) {
+		return Math.abs((one - two));
+		
+		
+	}	
+	
 }

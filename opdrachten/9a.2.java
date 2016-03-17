@@ -50,8 +50,8 @@ public class CuriousBehavior09 extends Behavior {
 	/**
 	 * Andere waarden
 	 */
-	private int threshold = 50;
-	private int speedThreshold = 20;
+	private int threshold = 30;
+	private int speedThreshold = 10;
 	private int rnd1 = 0;
 	private int rnd2 = 0;
 	private int wait = 0;
