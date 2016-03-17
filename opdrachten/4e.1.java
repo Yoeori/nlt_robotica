@@ -22,24 +22,9 @@ public class DriveBehavior04 extends Behavior {
 	}
 
 	public void doBehavior() {
-		System.out.println(count);
-		joBot.printLCD("State=" + state);
-		
 		if (state == 10) {
-			jobotDrive(10, 11, 100, 65, 14);
-		} else if (state == 11) {
-			jobotDrive(11, 12, 50, 50, 15);
-		} else if (state == 12) {
-			jobotDrive(12, 13, 40, 50, 7);
-		} else if (state == 13) {
-			jobotDrive(13, 14, 40, 40, 5);
-		} else if (state == 14) {
-			jobotDrive(14, 15, 80, 60, 10);
-		} else if (state == 15) {
-			jobotDrive(15, 16, 80, 50, 10);
-		} else {
-			joBot.drive(0, 0);
-			joBot.printLCD("State=done");
+			jobotDrive(10, 11, 50, 50, 20);
+			joBot.printLCD("State=10");
 		}
 	}
 

@@ -11,7 +11,7 @@ import com.muvium.apt.PeriodicTimer;
 
 public class DriveBehavior04 extends Behavior {
 	private BaseController joBot;
-	private int state = 10;
+	private int state = 20;
 	private int count = 0;
 	int fl = 0;
 
@@ -22,30 +22,18 @@ public class DriveBehavior04 extends Behavior {
 	}
 
 	public void doBehavior() {
-		System.out.println(count);
-		joBot.printLCD("State=" + state);
-		
-		if (state == 10) {
-			jobotDrive(10, 11, 100, 65, 14);
-		} else if (state == 11) {
-			jobotDrive(11, 12, 50, 50, 15);
-		} else if (state == 12) {
-			jobotDrive(12, 13, 40, 50, 7);
-		} else if (state == 13) {
-			jobotDrive(13, 14, 40, 40, 5);
-		} else if (state == 14) {
-			jobotDrive(14, 15, 80, 60, 10);
-		} else if (state == 15) {
-			jobotDrive(15, 16, 80, 50, 10);
-		} else {
-			joBot.drive(0, 0);
-			joBot.printLCD("State=done");
+		if (state == 20) {
+			joBotDrive(10, 10, 50, 50, 20);
 		}
 	}
 
-	private void jobotDrive(int curState, int newState, int l, int r, int t) {
+	private void joBotDrive(int curState, int newState, int l, int r, int t) {
 		if (state == curState) { // cur = Current, ofwel huidige waarde
-			joBot.drive(l, r);
+			if (count < 5) {
+				joBot.drive(100, 0);
+			} else if (count <= 25) {
+				joBot.drive(100, 100);
+			}
 			if (count++ >= t) {
 				state = newState;
 				joBot.printLCD("State=" + state);

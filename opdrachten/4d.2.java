@@ -64,8 +64,7 @@ public class DriveBehavior04 extends Behavior {
 		if (state == 3) {			
 			joBot.drive(0, 0);
 			joBot.printLCD("State=3");
-		} }
-		
-
-	}
+		}
+  }
+}
 
