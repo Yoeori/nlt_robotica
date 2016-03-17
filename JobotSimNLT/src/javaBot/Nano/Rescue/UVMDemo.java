@@ -174,7 +174,7 @@ public class UVMDemo extends UVMRunnable implements AgentWebService,
 		//		Opdracht 4F - Rijd in een vierkantje
 		//		Opdracht 5C - Rijd tot aan de zwarte lijn
 		//		Opdracht 5E - Doorzoek het moeras
-			currentBehavior = new DriveBehavior(joBot, behaviorServiceTick, 100);
+			currentBehavior = new DriveBehavior04(joBot, behaviorServiceTick, 100);
 			break;
 		case STATE_CURIOUS: // 4
 		//		Opdracht 5D - Maak sensoren gevoeliger
