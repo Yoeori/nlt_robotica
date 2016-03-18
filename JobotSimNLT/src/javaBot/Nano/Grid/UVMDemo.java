@@ -174,7 +174,7 @@ public class UVMDemo extends UVMRunnable implements AgentWebService,
 		//	Opdracht 8  - Maak reactief gedrag
 		//  Opdracht 9  - Detecteer beweging
 		//  Opdracht 10 - Ontwijk obstakel
-			currentBehavior = new CuriousBehavior09(joBot, behaviorServiceTick,	100);
+			currentBehavior = new CuriousBehavior10(joBot, behaviorServiceTick,	100);
 			break;
 		case STATE_WALL_FOLLOWER: // 8
 		//  Opdracht 10 - Volg de muur
