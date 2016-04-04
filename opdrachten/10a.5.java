@@ -63,7 +63,7 @@ public class CuriousBehavior10 extends Behavior {
 	private int diff = 0;
 	private int speed = 50;
 
-	// Substates toegevoegd voor opdracht 10a – stap 1
+	// Substates toegevoegd voor opdracht 10a â€“ stap 1
 	private static final int stateBackup = 51;
 	private int subState = 0;
 	private int subCount = 0;
@@ -180,9 +180,7 @@ public class CuriousBehavior10 extends Behavior {
 			System.out.println(wait);
 			joBot.drive(rnd1, rnd2);
 			state = stateActWander;
-		}
-		
-		if (state == stateActWander) {
+		} else if (state == stateActWander) {
 			// Show wandering = yellow
 			joBot.setStatusLeds(true, false, false);
 			if (wait-- > 0)
@@ -234,14 +232,14 @@ public class CuriousBehavior10 extends Behavior {
 			System.out.print("Avoid obstacle: ");
 			System.out.print(rnd1);
 			rnd2 = rnd1 & 0x3F; // Make less than 64
-			
-			//In plaats van eerst recht achteruit rijden laten we het robotje meteen weer de bocht maken proporioneel op de afstand van het object
-			if (rnd1 > 64) {
-				dl = -100*(dist/100);
-				dr = -60*(dist/100);
+			if (rnd1 > 64)
+				ds = -rnd2;
+			else if (rnd1 > 32) {
+				dl = -52;
+				dr = (int)(-rnd2/1.2);
 			} else {
-				dl = -60*(dist/100);
-				dr = -100*(dist/100);
+				dl = (int)(-rnd2/1.2);
+				dr = -52;
 			}
 			System.out.print(" L=");
 			System.out.print(dl);
@@ -250,7 +248,7 @@ public class CuriousBehavior10 extends Behavior {
 		}
 		if (subState == stateBackup) {
 			if (subCount++ < 10) {
-				joBot.drive(dl*speedmodifier < -100 ? -100 : dl*speedmodifier , dr*speedmodifier < -100 ? -100 : dr*speedmodifier); //de snelheid wordt aangepast aan de snelheid van het object
+				joBot.drive(dl*speedmodifier, dr*speedmodifier);
 			} else {
 				subCount = 0;
 				subState = 0;

@@ -63,7 +63,7 @@ public class CuriousBehavior10 extends Behavior {
 	private int diff = 0;
 	private int speed = 50;
 
-	// Substates toegevoegd voor opdracht 10a – stap 1
+	// Substates toegevoegd voor opdracht 10a â€“ stap 1
 	private static final int stateBackup = 51;
 	private int subState = 0;
 	private int subCount = 0;
@@ -180,9 +180,7 @@ public class CuriousBehavior10 extends Behavior {
 			System.out.println(wait);
 			joBot.drive(rnd1, rnd2);
 			state = stateActWander;
-		}
-		
-		if (state == stateActWander) {
+		} else if (state == stateActWander) {
 			// Show wandering = yellow
 			joBot.setStatusLeds(true, false, false);
 			if (wait-- > 0)

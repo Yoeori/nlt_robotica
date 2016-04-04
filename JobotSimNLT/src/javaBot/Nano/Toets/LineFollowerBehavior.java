@@ -60,7 +60,7 @@ public class LineFollowerBehavior extends Behavior
 		}
 
 		if (state == 1) {
-				sl = lineFollowerBlack(speed, lBlk, rBlk, lYel, 0);
+				sl = lineFollowerBlack(speed, lBlk, rBlk, lYel, rYel);
 				if (sl > 0) {
 					System.out.print("Found yellow = ");
 					System.out.println(sl);
@@ -97,15 +97,15 @@ public class LineFollowerBehavior extends Behavior
 			joBot.setLed(BaseController.LED_YELLOW, true);
 		}
 
-		if ((stopLd > 0) && (sl >= stopLd)) {
+		if ((stopLd > 0) && (sl >= stopLd) && (stopRd > 0 ) && (sr >= stopRd)) {
 			joBot.setLed(BaseController.LED_BLUE, true);
 			return sl;
 		}
 		
-		if ((stopRd > 0 ) && (sr >= stopRd)) {
+		/*if ((stopRd > 0 ) && (sr >= stopRd)) {
 			joBot.setLed(BaseController.LED_BLUE, true);
 			return sr;
-		}
+		}*/
 		
 		return 0;
 	}
